@@ -1,18 +1,31 @@
 import React from 'react';
 
 function Searchbar() {
-	return (
+	const [term, setTerm] = React.useState('');
 
+	const search = () => {
+		console.log('szukaj', term)
+	}
+	
+	const onKeyDownHandler = e => {
+		if (e.key === 'Enter') {
+			search();
+		}
+	}
+
+	return(
 			<div className =" d-flex">
 				<input
-					// style={{
-					// 	width: 'calc(100% - 20px)',
-					// }}
+					value={term}
+					onKeyDown={e => console.log(e.key === "Enter")}
+					onChange={e => setTerm(e.target.value)}
 					className='form-control'
 					type='text'
 					placeholder='Szukaj...'
 				/>
-				<button className="ml-1 btn btn-secondary">Szukaj</button>
+				<button 
+				onClick={search}
+				className="ml-1 btn btn-secondary">Szukaj</button>
 			</div>
 
 	);
