@@ -1,10 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Searchbar() {
+const propTypes = {
+	onSearch: PropTypes.func.isRequired
+
+};
+
+function Searchbar(props) {
 	const [term, setTerm] = React.useState('');
 
 	const search = () => {
-		console.log('szukaj', term)
+		// console.log('szukaj', term)
+		props.onSearch(term);
 	}
 	
 	const onKeyDownHandler = e => {
@@ -17,7 +24,7 @@ function Searchbar() {
 			<div className =" d-flex">
 				<input
 					value={term}
-					onKeyDown={e => console.log(e.key === "Enter")}
+					onKeyDown={onKeyDownHandler}
 					onChange={e => setTerm(e.target.value)}
 					className='form-control'
 					type='text'
@@ -30,5 +37,10 @@ function Searchbar() {
 
 	);
 }
+
+
+
+Searchbar.propTypes = propTypes
+
 
 export default Searchbar;
